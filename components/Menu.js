@@ -9,6 +9,7 @@ const Menu = props => {
         key={index}
         title={item.name}
         subtitle={item.description}
+        onPress={() => props.onPress(item.id)}
         hideChevron={false}
         roundAvatar
         avatar={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' }}
