@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { Card } from 'react-native-elements'
+import {DISHES} from '../shared/dishes'
 
-const Renderdish = props => {
+const RenderDish = props => {
   const dish = props.dish
 
   if (dish != null) {
     return (
       <Card
-        featuredTitle={Dishdetail.name}
+        featuredTitle={DishDetail.name}
         image={require('./images/uthappizza.png')}
       >
         <Text style={{ margin: 10 }}>{dish.description}</Text>
@@ -17,6 +18,25 @@ const Renderdish = props => {
   } else return <View />
 }
 
-const Dishdetail = props => <Renderdish dish={props.dish} />
+class DishDetail extends Component {
 
-export default Dishdetail
+  constructor(props) {
+      super(props);
+      this.state = {
+          dishes: DISHES
+      };
+  }
+
+  static navigationOptions = {
+      title: 'Dish Details'
+  };
+
+  render() {
+      const dishId = this.props.navigation.getParam('dishId','');
+      return(
+          <RenderDish dish={this.state.dishes[+dishId]} />
+      );
+  }
+}
+
+export default DishDetail
